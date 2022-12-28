@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"basic.gin.api/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -18,8 +17,4 @@ func BuildGormMysql() *gorm.DB {
 		panic("create mysql connection error")
 	}
 	return db
-}
-
-func RegisterTables() {
-	model.DB.AutoMigrate(model.SysUser{}) //表注册
 }

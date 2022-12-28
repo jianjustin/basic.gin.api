@@ -1,4 +1,4 @@
-package model
+package entity
 
 type SysUser struct {
 	Id       uint   `json:"id"  gorm:"id"`

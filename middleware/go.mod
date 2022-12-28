@@ -1,4 +1,4 @@
-module basic.gin.api
+module basic.gin.api/middleware
 
 go 1.19
 
