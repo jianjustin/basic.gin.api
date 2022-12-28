@@ -20,7 +20,7 @@ func main() {
 	model.DB = middleware.BuildGormMysql()
 	tool.RegisterTables()
 
-	addr := flag.String("addr", "localhost:8972", "server address")
+	addr := flag.String("addr", "localhost:8973", "server address")
 
 	//启动本地TCP Server
 	go func() {
@@ -32,7 +32,7 @@ func main() {
 	d, _ := client.NewPeer2PeerDiscovery("tcp@"+*addr, "")
 	opt := client.DefaultOption
 	opt.SerializeType = protocol.JSON
-	xclient := client.NewXClient("Arith", client.Failtry, client.RandomSelect, d, opt)
+	xclient := client.NewXClient("Goods", client.Failtry, client.RandomSelect, d, opt)
 	defer xclient.Close()
 
 	args := service.Args{
@@ -42,7 +42,7 @@ func main() {
 
 	for {
 		reply := &service.Reply{}
-		err := xclient.Call(context.Background(), "Mul", args, reply)
+		err := xclient.Call(context.Background(), "Add", args, reply)
 		if err != nil {
 			log.Fatalf("failed to call: %v", err)
 		}

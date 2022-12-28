@@ -2,10 +2,12 @@ package main
 
 import (
 	"basic.gin.api/goods/entity"
+	"basic.gin.api/goods/service"
 	"basic.gin.api/goods/tool"
 	"basic.gin.api/middleware"
 	"basic.gin.api/middleware/model"
 	"github.com/gin-gonic/gin"
+	"github.com/smallnest/rpcx/server"
 )
 
 func main() {
@@ -20,6 +22,13 @@ func main() {
 		}
 		model.DB.Create(&good)
 	*/
+
+	//启动本地TCP Server
+	go func() {
+		s := server.NewServer()
+		s.RegisterName("Goods", new(service.Arith), "")
+		s.Serve("tcp", ":8973")
+	}()
 
 	good := &entity.Good{}
 	model.DB.First(&good)
