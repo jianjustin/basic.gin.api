@@ -7,4 +7,12 @@ import (
 
 func main() {
 	model.DB = middleware.BuildGormMysql()
+	middleware.RegisterTables()
+
+	user := &model.SysUser{
+		UserName: "admin1",
+		Password: "admin1",
+	}
+
+	model.DB.Create(&user)
 }
